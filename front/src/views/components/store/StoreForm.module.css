@@ -1,0 +1,87 @@
+.container {
+  padding: 24px;
+  background-color: #ffffff;
+  color: #333333; 
+  min-height: 100vh;
+}
+
+
+.container h5 {
+  color: #1a1a1a;
+}
+
+.searchField .MuiInputBase-root {
+  color: #333333; 
+  background-color: #ffffff;
+}
+
+.searchField .MuiInputLabel-root {
+  color: #666666; 
+}
+
+.storeCard {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #e0e0e0; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
+}
+
+.storeCardTitle {
+  color: #1a1a1a; 
+}
+
+.storeCardContent {
+  color: #555555;
+}
+
+.primaryButton {
+  background-color: #464546 !important; 
+  color: #fff;
+}
+
+.primaryButton:hover {
+  background-color: #9e9fa0 !important;
+}
+
+.editButton {
+  color: #868686 !important; 
+}
+
+.editButton:hover {
+  color: #000000 !important;
+}
+
+.deleteButton {
+  color: #868686 !important; 
+}
+
+.deleteButton:hover {
+    color: #000000 !important;
+}
+
+.dialogTitle {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.dialogContent {
+  background-color: #ffffff;
+}
+
+.dialogActions {
+  background-color: #ffffff;
+  border-top: 1px solid #eeeeee;
+}
+
+.dialogContent .MuiTextField-root .MuiInputBase-input {
+  color: #333;
+}
+
+.dialogContent .MuiInputLabel-root {
+  color: #666;
+}
+
+.dialogContent .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #333 !important; 
+}

@@ -1,0 +1,53 @@
+.formContainer {
+  padding: 24px;
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+  color: #333333;
+  max-width: 400px;
+  margin: auto;
+}
+
+.title {
+  color: #1a1a1a !important;
+  margin-bottom: 8px;
+}
+
+.textField {
+     color: #aa2222 !important; 
+}
+
+.textField .MuiInputBase-input {
+  color: #333333 !important; 
+}
+
+.textField .MuiInputLabel-root {
+  color: #666666 !important;
+}
+
+.textField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #d21919 !important;
+}
+
+.saveButton {
+  background-color: #b4a9a9 !important; 
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.saveButton:hover {
+  background-color: #1a1a1a !important;
+}
+
+.saveButton.Mui-disabled {
+  background-color: #bbdefb !important;
+}
+
+.cancelButton {
+  color: #666666 !important;
+  border-color: #cccccc !important;
+}
+
+.cancelButton:hover {
+  background-color: #f0f0f0 !important;
+}

@@ -1,0 +1,56 @@
+html, body, #root, .app-layout {
+  /* Essencial: Garante que o Flexbox principal ocupe 100% da altura da viewport */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Define o layout principal da aplicação como uma coluna flexível que ocupa 100% da altura */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* O wrapper do conteúdo principal deve ocupar todo o espaço restante para empurrar o footer */
+.main-content-wrapper {
+  flex-grow: 1; /* Ocupa todo o espaço restante */
+  display: flex;
+  flex-direction: column; /* Necessário para alinhar o Navbar e o Container em coluna */
+}
+
+/* Garante que o Container do MUI (dentro do wrapper) também se expanda para ocupar o espaço disponível */
+.content-container {
+    flex-grow: 1;
+}
+
+/* ESTILOS DO FOOTER: Ocupa 15% da tela e é empurrado para o final */
+.app-footer {
+  /* Define a altura exata de 15% da altura da viewport */
+  height: 15vh; 
+  
+  /* Estilos visuais */
+  background-color: #374151; 
+  color: white; 
+  width: 100%;
+  
+  /* Propriedades Flexbox para centralizar o conteúdo do rodapé verticalmente */
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  
+  /* Garante que o footer não encolha quando o conteúdo principal se expandir */
+  flex-shrink: 0; 
+}

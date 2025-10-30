@@ -1,0 +1,1 @@
+export { StoresTable } from './StoresTable.jsx';

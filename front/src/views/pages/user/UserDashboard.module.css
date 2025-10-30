@@ -1,0 +1,37 @@
+.dashboardContainer {
+  min-height: 100vh;
+  background-color: #f0f0f0; 
+  color: #333333; 
+}
+
+.dashboardContainer h4 {
+  color: #1a1a1a !important; 
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.dashboardContainer h6 {
+  color: #333333 !important; 
+  font-weight: 600;
+}
+
+.tabsPaper {
+  background-color: #ffffff !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.MuiTab-root {
+  color: #666666 !important; 
+  font-weight: 500;
+  text-transform: none !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: #000000 !important; 
+  font-weight: 600;
+}
+
+.MuiTabs-indicator {
+  background-color: #000000 !important; 
+}

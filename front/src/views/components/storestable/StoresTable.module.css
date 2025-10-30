@@ -1,0 +1,93 @@
+.tableContainer {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05) !important; 
+  border: 1px solid #e0e0e0;
+}
+
+.tableHead {
+  background-color: #f5f5f5;
+}
+
+.tableHeadCell {
+  color: #333333 !important;
+  font-weight: bold !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.tableRow {
+  transition: background-color 0.3s;
+}
+
+.tableRow:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.tableRow:nth-of-type(even) {
+  background-color: #fdfdfd; 
+}
+
+.tableRow:hover {
+  background-color: #f0f0f0 !important;
+}
+
+.tableCell {
+  color: #555555 !important;
+  border-bottom: 1px solid #eeeeee !important;
+}
+
+.editButton {
+  color: #1976d2 !important; 
+}
+
+.deleteButton {
+  color: #d32f2f !important; 
+}
+
+.searchField .MuiInputBase-root {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.searchField .MuiInputLabel-root {
+  color: #666666;
+}
+
+.searchField .MuiOutlinedInput-notchedOutline {
+    border-color: #cccccc !important;
+}
+
+.dialogTitle {
+  background-color: #ffffff;
+  color: #333333;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.dialogContent {
+  background-color: #ffffff;
+}
+
+.dialogActions {
+  background-color: #ffffff;
+  border-top: 1px solid #eeeeee;
+}
+
+.dialogContent .MuiInputBase-input {
+  color: #333;
+}
+
+.dialogContent .MuiInputLabel-root {
+  color: #666;
+}
+
+.saveButton {
+  background-color: #030303 !important;
+  color: #fff !important;
+}
+
+.saveButton:hover {
+  background-color: #8e8e8f !important;
+}
+
+.cancelButton {
+    color: #666666 !important;
+}

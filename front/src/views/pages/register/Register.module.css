@@ -1,0 +1,58 @@
+.registerContainer {
+  background-color: #ffffff !important; 
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 30px; 
+}
+
+.title {
+  color: #1a1a1a !important;
+  font-weight: 600;
+  margin-bottom: 24px !important;
+  text-align: center;
+}
+
+.textField .MuiInputBase-input {
+  color: #333333; 
+}
+
+.textField .MuiInputLabel-root {
+  color: #666666; 
+}
+
+.textField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #1976d2 !important; 
+}
+
+.submitButton {
+  background-color: #000000 !important; 
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+.submitButton:hover {
+  background-color: #666666 !important;
+}
+
+.submitButton.Mui-disabled {
+  background-color: #bbdefb !important;
+  color: #ffffff !important;
+}
+
+.alertBoxError {
+  background-color: #fff3e0 !important; 
+  color: #d32f2f !important; 
+  border-left: 5px solid #d32f2f !important;
+  margin-bottom: 16px !important;
+}
+.alertBoxSuccess {
+  background-color: #e8f5e9 !important; 
+  color: #4caf50 !important; 
+  border-left: 5px solid #4caf50 !important;
+  margin-bottom: 16px !important;
+}
+
+.alertBoxError .MuiAlert-icon, .alertBoxSuccess .MuiAlert-icon {
+    color: inherit !important;
+}

@@ -1,0 +1,100 @@
+.dashboardContainer {
+  min-height: 100vh;
+  background-color: #f5f5f5; 
+  color: #000000;
+}
+
+.dashboardContainer :global(.MuiTypography-root) {
+  color: #000000 !important;
+}
+
+.dashboardContainer :global(.MuiPaper-root) {
+  background-color: #ffffff !important; 
+  color: #000000 !important;
+  border: 1px solid #000000;
+}
+
+.dashboardContainer :global(.MuiTableHead) {
+  background-color: #000000; 
+}
+
+.dashboardContainer :global(.MuiTableHead .MuiTableCell-root) {
+  color: #ffffff !important; 
+  border-bottom: 1px solid #ffffff;
+  font-weight: bold;
+}
+
+.dashboardContainer :global(.MuiTableRow-root) {
+  border-bottom: 1px solid #cccccc; 
+}
+
+.dashboardContainer :global(.MuiTableBody .MuiTableCell-root) {
+  color: #000000; 
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dashboardContainer :global(.MuiTextField-root .MuiOutlinedInput-root) {
+  color: #000000 !important;
+}
+.dashboardContainer :global(.MuiTextField-root .MuiOutlinedInput-notchedOutline) {
+  border-color: #000000 !important;
+}
+.dashboardContainer :global(.MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline),
+.dashboardContainer :global(.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: #000000 !important;
+  border-width: 2px !important;
+}
+.dashboardContainer :global(.MuiInputLabel-root.Mui-focused) {
+  color: #000000 !important;
+}
+
+.dashboardContainer :global(.MuiIconButton-root) {
+  color: #000000 !important; 
+}
+.dashboardContainer :global(.MuiIconButton-root:hover) {
+  background-color: #e0e0e0 !important; 
+}
+
+.dashboardContainer :global(.MuiDialog-paper) {
+  background-color: #ffffff !important; 
+  color: #000000 !important;
+  border: 1px solid #000000;
+}
+.dashboardContainer :global(.MuiDialogTitle-root) {
+  background-color: #000000;
+  color: #ffffff !important;
+}
+.dashboardContainer :global(.MuiDialogContent-root) {
+  color: #333333;
+}
+
+
+.dashboardContainer :global(.MuiDialogActions-root .MuiButton-root) {
+    color: #000000 !important;
+}
+.dashboardContainer :global(.MuiDialogActions-root .MuiButton-root.MuiButton-textError) {
+    color: #ff0000 !important;
+    border: 1px solid #ff0000;
+}
+.dashboardContainer :global(.MuiDialogActions-root .MuiButton-root.MuiButton-textError:hover) {
+    background-color: #ffeeee !important;
+}
+
+.dashboardContainer :global(.MuiCircularProgress-root) {
+    color: #000000 !important;
+}
+
+.dashboardContainer :global(.MuiAlert-root) {
+    background-color: #f0f0f0 !important; 
+    color: #000000 !important;
+    border-left: 5px solid #000000 !important; 
+}
+.dashboardContainer :global(.MuiAlert-icon) {
+    color: #000000 !important;
+}
+.MuiTabs-root {
+  background-color: #ffffff; /* Fundo branco para a barra de abas */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
