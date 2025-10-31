@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { StoreService } from "../../../models/api/StoreService";
+import { useNavigate } from "react-router-dom";
 import styles from "./StoreForm.module.css"; 
 
 /**
@@ -34,6 +35,8 @@ const StoreForm = () => {
     imageUrl: "",
     description: "",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadStores();
@@ -106,6 +109,10 @@ const StoreForm = () => {
     }
   };
 
+  const goToStorePage = (storeId) => {
+    navigate(`/store/${storeId}`); 
+  };
+
   return (
     <div className={styles.container}> 
       <Typography variant="h5" gutterBottom sx={{ color: "#fff" }}>
@@ -150,7 +157,12 @@ const StoreForm = () => {
           <Grid item xs={12} sm={6} md={4} key={store.id}>
             <Card className={styles.storeCard}> 
               <CardContent>
-                <Typography variant="h6" className={styles.storeCardTitle}>
+                <Typography
+                  variant="h6"
+                  className={styles.storeCardTitle}
+                  onClick={() => goToStorePage(store.id)} 
+                  style={{ cursor: "pointer" }}
+                >
                   {store.name}
                 </Typography>
                 <Typography variant="body2" className={styles.storeCardContent}>
@@ -169,14 +181,14 @@ const StoreForm = () => {
                       objectFit: "cover",
                       borderRadius: "8px",
                       marginTop: "8px",
+                      cursor: "pointer", 
                     }}
+                    onClick={() => goToStorePage(store.id)} 
                   />
                 )}
                 <Typography variant="body2" className={styles.storeCardContent} sx={{ mt: 1 }}>
                   {store.description}
                 </Typography>
-
-                {/* 6. Aplica classes para estilizar os IconButtons */}
                 <IconButton onClick={() => handleEdit(store)} className={styles.editButton}> 
                   <Edit />
                 </IconButton>
@@ -190,7 +202,6 @@ const StoreForm = () => {
       </Grid>
 
       <Dialog open={open} onClose={() => setOpen(false)}>
-        {/* 7. Aplica classes para estilizar o Dialog */}
         <DialogTitle className={styles.dialogTitle}> 
           {editing ? "Editar Loja" : "Nova Loja"}
         </DialogTitle>

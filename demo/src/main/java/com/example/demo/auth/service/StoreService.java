@@ -125,4 +125,21 @@ public class StoreService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public StoreResponseDto findByIdPublic(Long id) {
+        Store store = storeRepository.findById(id).orElse(null);
+        if (store == null) return null;
+
+        return StoreResponseDto.builder()
+                .id(store.getId())
+                .name(store.getName())
+                .address(store.getAddress())
+                .contact(store.getContact())
+                .imageUrl(store.getImageUrl())
+                .description(store.getDescription())
+                .ownerEmail(null) 
+                .build();
+    }
+
+
 }

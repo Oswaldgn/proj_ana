@@ -12,3 +12,4 @@ export { AdminDashboard } from './pages';
 export { HomePage } from './pages';
 export { StoreForm } from './components';
 export { StoresTable } from './components';
+export {StorePage} from "./pages";

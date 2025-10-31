@@ -34,7 +34,6 @@ const StoreAdminService = {
     }
   },
 
-  // Requisição pública (sem token)
   getAllStoresPublic: async () => {
     try {
       const response = await fetch(`${API_URL}/public`, {
@@ -97,6 +96,26 @@ const StoreAdminService = {
       throw error;
     }
   },
+  
+  getByIdPublic: async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/public/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar loja pública por ID");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Erro ao buscar loja pública por ID:", error);
+      throw error;
+    }
+  },
+
+  
 };
 
 export { StoreAdminService };

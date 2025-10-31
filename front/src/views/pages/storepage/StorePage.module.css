@@ -1,0 +1,127 @@
+.pageContainer, .contentCard, .textField {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.pageContainer {
+  padding-top: 48px !important;
+  padding-bottom: 48px !important;
+}
+
+.imageCard {
+  border-radius: 16px !important; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important; 
+  background-color: #f8f8f8; 
+  overflow: hidden;
+}
+
+.imageCard img {
+  border-radius: 16px;
+}
+
+.contentCard {
+  background-color: #ffffff !important;
+  border-radius: 16px !important; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important; 
+  padding: 32px !important; 
+  color: #333333; 
+}
+
+.mainTitle {
+  color: #212121 !important; 
+  font-weight: 700 !important; 
+  font-size: 2.25rem !important; 
+  margin-bottom: 16px !important; 
+  text-align: left; 
+}
+
+.sectionTitle {
+  color: #424242 !important; 
+  font-weight: 600 !important;
+  font-size: 1.3rem !important;
+  margin-top: 24px !important;
+  margin-bottom: 8px !important;
+  text-align: left;
+}
+
+.bodyText {
+  color: #616161 !important; 
+  line-height: 1.8 !important; 
+  font-size: 1.05rem !important; 
+  margin-bottom: 12px !important; 
+  text-align: left; 
+}
+
+.divider {
+  background-color: #eeeeee !important;
+  margin: 24px 0 !important; 
+}
+
+.textField {
+  margin-bottom: 20px !important; 
+}
+.textField .MuiInputBase-input {
+  color: #333333;
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+.textField .MuiInputLabel-root {
+  color: #757575;
+}
+.textField .MuiOutlinedInput-root {
+  border-radius: 8px; 
+}
+.textField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #707070 !important;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2); 
+}
+.textField .MuiOutlinedInput-notchedOutline {
+    border-color: #bdbdbd; 
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 12px; 
+    margin-top: 20px; 
+}
+
+.buttonGroup button {
+    padding: 10px 24px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    text-transform: capitalize; 
+}
+
+.editButton {
+  background-color: #141414 !important; 
+  color: #ffffff !important;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+.editButton:hover {
+  background-color: #5e5e5e !important;
+}
+
+.saveButton {
+  background-color: #000000 !important; 
+  color: #ffffff !important;
+  width: 130px;
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+}
+.saveButton:hover {
+  background-color: #666666!important;
+}
+
+.cancelButton {
+  color: #fafafa !important;
+  background-color: #333 !important;
+  width: 130px;
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+}
+.cancelButton:hover {
+  background-color: #666666!important;
+}

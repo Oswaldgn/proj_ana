@@ -46,13 +46,17 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/api/auth/**",
                     "/api/users/register",
-                    "/api/users/login"
+                    "/api/users/login",
+                    "/api/store/public",
+                    "/api/store/public/**"
                 ).permitAll()
                 .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/users/**").hasRole("ADMIN")
-                .requestMatchers("/api/store/public").permitAll()
+                .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/api/users/**").hasRole("ADMIN")
+                .requestMatchers("/api/store/my").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/store").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN") 
+                .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -75,15 +79,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("http://localhost:3000"));
-        config.setAllowedHeaders(List.of(
-            "Origin", "Content-Type", "Accept", "Authorization"
-        ));
-        config.setAllowedMethods(List.of(
-            "GET", "POST", "PUT", "DELETE", "OPTIONS"
-        ));
+        config.setAllowedHeaders(List.of("Origin", "Content-Type", "Accept", "Authorization"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-
         return new CorsFilter(source);
     }
 }

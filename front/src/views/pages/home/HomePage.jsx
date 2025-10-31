@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Card,
@@ -10,9 +11,10 @@ import {
   CircularProgress,
   Button,
   TextField,
+  Stack,
 } from "@mui/material";
 import { StoreAdminService } from "../../../models/api/StoreAdminService";
-import styles from "./HomePage.module.css"; // Importa o módulo CSS
+import styles from "./HomePage.module.css";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -21,7 +23,8 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -47,22 +50,30 @@ const HomePage = () => {
 
   const indexOfLastStore = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstStore = indexOfLastStore - ITEMS_PER_PAGE;
-  const visibleStores = filteredStores.slice(indexOfFirstStore, indexOfLastStore);
+  const visibleStores = filteredStores.slice(
+    indexOfFirstStore,
+    indexOfLastStore
+  );
 
   const totalPages = Math.ceil(filteredStores.length / ITEMS_PER_PAGE);
 
+  const handleOpenStore = (storeId) => {
+    navigate(`/store/${storeId}`);
+  };
+
   return (
     <Container className={styles.container}>
-      {/* Aplica a classe ao Card de Apresentação */}
       <Card sx={{ mb: 4 }} className={styles.presentationCard}>
-        <CardMedia
-          component="img"
-          height="300"
-          image="/presentation.jpg"
-          alt="Apresentação do site"
-        />
+        <CardActionArea onClick={() => {}}>
+          <CardMedia
+            component="img"
+            height="300"
+            image="/presentation.jpg"
+            alt="Apresentação do site"
+          />
+        </CardActionArea>
       </Card>
-      {/* Aplica a classe ao Campo de Busca */}
+
       <TextField
         fullWidth
         label="Buscar loja"
@@ -70,22 +81,27 @@ const HomePage = () => {
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          setCurrentPage(1); 
+          setCurrentPage(1);
         }}
         sx={{ mb: 4 }}
         className={styles.searchField}
       />
 
-      {loading && <CircularProgress sx={{ display: "block", margin: "20px auto" }} />}
-      {error && <Typography color="error" sx={{ textAlign: "center", mt: 2 }}>{error}</Typography>}
+      {loading && (
+        <CircularProgress sx={{ display: "block", margin: "20px auto" }} />
+      )}
+      {error && (
+        <Typography color="error" sx={{ textAlign: "center", mt: 2 }}>
+          {error}
+        </Typography>
+      )}
 
       <Grid container spacing={4} justifyContent="center">
         {visibleStores.map((store) => (
           <Grid item xs={12} sm={6} md={5} key={store.id}>
             <Card
-              // Aplica a classe ao Card da Loja e remove os estilos sx que serão gerenciados pelo CSS
               className={styles.storeCard}
-              sx={{ 
+              sx={{
                 display: "flex",
                 flexDirection: "column",
                 borderRadius: 3,
@@ -94,7 +110,10 @@ const HomePage = () => {
                 "&:hover": { transform: "translateY(-5px)", boxShadow: 6 },
               }}
             >
-              <CardActionArea sx={{ display: "flex", flexDirection: "column" }}>
+              <CardActionArea
+                onClick={() => handleOpenStore(store.id)}
+                sx={{ display: "flex", flexDirection: "column" }}
+              >
                 {store.imageUrl && (
                   <CardMedia
                     component="img"
@@ -105,18 +124,42 @@ const HomePage = () => {
                   />
                 )}
                 <CardContent>
-                  {/* Aplica a classe ao Título da Loja */}
-                  <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }} className={styles.storeTitle}>
-                    {store.name}
-                  </Typography>
-                  {/* Aplica a classe ao Texto Secundário */}
-                  <Typography variant="body2" color="text.secondary" mb={0.5} className={styles.storeSecondaryText}>
+                  <Stack
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                  >
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ fontWeight: 600, cursor: "pointer" }}
+                      className={styles.storeTitle}
+                    >
+                      {store.name}
+                    </Typography>
+                  </Stack>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    mb={0.5}
+                    className={styles.storeSecondaryText}
+                  >
                     {store.address}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" mb={0.5} className={styles.storeSecondaryText}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    mb={0.5}
+                    className={styles.storeSecondaryText}
+                  >
                     {store.contact}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" className={styles.storeSecondaryText}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    className={styles.storeSecondaryText}
+                  >
                     {store.description}
                   </Typography>
                 </CardContent>
@@ -126,10 +169,8 @@ const HomePage = () => {
         ))}
       </Grid>
 
-      {/* Paginação */}
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 3 }}>
         <Button
-          // Aplica a classe ao botão de Paginação
           className={styles.paginationButton}
           variant="contained"
           disabled={currentPage === 1}
@@ -137,12 +178,14 @@ const HomePage = () => {
         >
           Anterior
         </Button>
-        {/* Aplica a classe ao texto da Paginação */}
-        <Typography variant="body1" sx={{ mx: 2, display: "flex", alignItems: "center" }} className={styles.paginationText}>
+        <Typography
+          variant="body1"
+          sx={{ mx: 2, display: "flex", alignItems: "center" }}
+          className={styles.paginationText}
+        >
           {currentPage} / {totalPages}
         </Typography>
         <Button
-          // Aplica a classe ao botão de Paginação
           className={styles.paginationButton}
           variant="contained"
           disabled={currentPage === totalPages || totalPages === 0}

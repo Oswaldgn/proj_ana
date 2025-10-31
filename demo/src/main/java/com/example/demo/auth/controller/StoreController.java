@@ -4,6 +4,8 @@ import java.nio.file.AccessDeniedException;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,39 +44,46 @@ public class StoreController {
     }
 
     @PostMapping
-    public StoreResponseDto createStore(@RequestBody StoreRequestDto dto, Principal principal) {
-        return storeService.createStore(principal.getName(), dto);
+    public ResponseEntity<?> createStore(@RequestBody StoreRequestDto dto, Principal principal) {
+        try {
+            StoreResponseDto store = storeService.createStore(principal.getName(), dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(store);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public StoreResponseDto updateStore(
-            @PathVariable Long id,
-            @RequestBody StoreRequestDto dto,
-            Principal principal
-    ) {
+    public ResponseEntity<?> updateStore(@PathVariable Long id,
+                                         @RequestBody StoreRequestDto dto,
+                                         Principal principal) {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
-
         boolean isAdmin = user.getRole().toString().equalsIgnoreCase("ADMIN");
 
         try {
-            return storeService.updateStore(id, principal.getName(), dto, isAdmin);
+            StoreResponseDto updated = storeService.updateStore(id, principal.getName(), dto, isAdmin);
+            return ResponseEntity.ok(updated);
         } catch (AccessDeniedException ex) {
-            throw new RuntimeException("Acesso negado: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado: " + ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStore(@PathVariable Long id, Principal principal) {
+    public ResponseEntity<?> deleteStore(@PathVariable Long id, Principal principal) {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
-
         boolean isAdmin = user.getRole().toString().equalsIgnoreCase("ADMIN");
 
         try {
             storeService.deleteStore(id, principal.getName(), isAdmin);
+            return ResponseEntity.noContent().build();
         } catch (AccessDeniedException ex) {
-            throw new RuntimeException("Acesso negado: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado: " + ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
 
@@ -84,8 +93,13 @@ public class StoreController {
     }
 
     @GetMapping("/{id}")
-    public StoreResponseDto findById(@PathVariable Long id) {
-        return storeService.findById(id);
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        try {
+            StoreResponseDto store = storeService.findById(id);
+            return ResponseEntity.ok(store);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
     }
 
     @GetMapping("/my")
@@ -97,5 +111,20 @@ public class StoreController {
     public List<StoreResponseDto> getAllStoresPublic() {
         return storeService.findAllPublic();
     }
+
+    @GetMapping("/public/{id}")
+    public ResponseEntity<?> getPublicStoreById(@PathVariable Long id) {
+        try {
+            StoreResponseDto store = storeService.findByIdPublic(id);
+            if (store == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Loja não encontrada");
+            }
+            return ResponseEntity.ok(store);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body("Erro ao buscar loja pública por ID");
+        }
+    }
+
 
 }

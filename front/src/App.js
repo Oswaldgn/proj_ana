@@ -1,6 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { AdminDashboard, Navbar, ProtectedRoute, Register, Login, UserDashboard, HomePage, Footer } from "./views";
+import { 
+  AdminDashboard, 
+  Navbar, 
+  ProtectedRoute, 
+  Register, 
+  Login, 
+  UserDashboard, 
+  HomePage, 
+  Footer,
+  StorePage 
+} from "./views";
 
 export default function App() {
   return (
@@ -12,6 +22,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/store/:id" element={<StorePage />} />
             <Route
               path="/admin"
               element={

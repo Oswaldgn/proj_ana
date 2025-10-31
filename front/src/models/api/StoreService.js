@@ -7,6 +7,7 @@ const API_URL = "http://localhost:8080/api/store";
  * @param {Object}  create - Cria uma nova loja vinculada ao usuário autenticado.
  * @param {Object}  update - Atualiza uma loja existente (apenas se o usuário for o proprietário).
  * @param {Object}  remove - Remove uma loja específica (apenas se o usuário for o dono).
+ * @param {Object}  getById - Busca os detalhes de uma loja específica pelo ID.
  * @returns {Object} Objeto com métodos para interagir com a API de lojas do usuário.
  */
 export const StoreService = {
@@ -98,6 +99,30 @@ export const StoreService = {
       return true;
     } catch (error) {
       console.error("Erro ao deletar loja:", error);
+      throw error;
+    }
+  },
+
+  getById: async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Usuário não autenticado");
+
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar loja por ID. Código: " + response.status);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Erro ao buscar loja por ID:", error);
       throw error;
     }
   },

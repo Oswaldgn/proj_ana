@@ -17,6 +17,7 @@ public class StoreResponseDto {
     private String contact; 
     private String imageUrl;
     private String description;
+    private Long ownerId;
     private String ownerEmail;
 
     public static StoreResponseDto fromEntity(Store store) {
@@ -27,6 +28,7 @@ public class StoreResponseDto {
                 .contact(store.getContact())
                 .imageUrl(store.getImageUrl())
                 .description(store.getDescription())
+                .ownerId(store.getOwner().getId())
                 .ownerEmail(store.getOwner().getEmail())
                 .build();
     }
