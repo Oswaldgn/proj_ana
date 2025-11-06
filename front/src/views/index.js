@@ -13,3 +13,5 @@ export { HomePage } from './pages';
 export { StoreForm } from './components';
 export { StoresTable } from './components';
 export {StorePage} from "./pages";
+export {ProductCardList} from './components';
+export { CreateProductModal } from './components';

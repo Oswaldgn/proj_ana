@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -42,23 +43,27 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> {})
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/auth/**",
-                    "/api/users/register",
-                    "/api/users/login",
-                    "/api/store/public",
-                    "/api/store/public/**"
-                ).permitAll()
-                .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/users/**").hasRole("ADMIN")
-                .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/users/**").hasRole("ADMIN")
-                .requestMatchers("/api/store/my").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/store").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated()
-            )
+        .authorizeHttpRequests(auth -> auth
+
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+            .requestMatchers("/api/auth/**", "/api/users/register", "/api/users/login").permitAll()
+
+            .requestMatchers(HttpMethod.GET, "/api/store/public/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/products/store/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/product/public/**").permitAll()
+
+            .requestMatchers(HttpMethod.POST, "/api/products/**").authenticated()
+            .requestMatchers(HttpMethod.PUT, "/api/products/**").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/api/products/**").authenticated()
+
+            .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/api/users/**").hasRole("ADMIN")
+            .requestMatchers("/api/store/my").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN")
+
+            .anyRequest().authenticated()
+        )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

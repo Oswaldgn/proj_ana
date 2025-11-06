@@ -1,0 +1,74 @@
+const URL_BASE = "http://localhost:8080/api/products";
+
+export const ProductService = {
+
+  async getByStoreId(storeId) {
+    if (!storeId || isNaN(storeId)) {
+      console.error("storeId inválido:", storeId);
+      throw new Error("storeId deve ser um número");
+    }
+
+    const response = await fetch(`${URL_BASE}/store/${storeId}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao carregar produtos");
+    }
+
+    return await response.json();
+  },
+
+  async create(storeId, productData, token) {
+    if (!storeId || isNaN(storeId)) {
+      throw new Error("storeId deve ser um número");
+    }
+
+    const response = await fetch(`${URL_BASE}/store/${storeId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao criar produto");
+    }
+
+    return await response.json();
+  },
+
+  async update(id, productData, token) {
+    const response = await fetch(`${URL_BASE}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao editar produto");
+    }
+
+    return await response.json();
+  },
+
+  async remove(id, token) {
+    const response = await fetch(`${URL_BASE}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao excluir produto");
+    }
+
+    return true;
+  },
+};

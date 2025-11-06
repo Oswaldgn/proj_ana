@@ -7,3 +7,6 @@ export { UsersTable } from './usertable/UsersTable';
 export { Footer } from './footer/Footer';
 export { StoreForm } from './store/StoreForm';
 export { StoresTable } from './storestable/StoresTable';
+export {  ProductCardList } from './product/ProductCardList';
+export { CreateProductModal } from './productmodal/CreateProductModal';
+export { EditProductModal } from'./editmodal/EditProductModal';
