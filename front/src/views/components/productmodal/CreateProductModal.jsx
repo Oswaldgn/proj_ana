@@ -20,21 +20,23 @@ const CreateProductModal = ({ open, onClose, storeId, onProductCreated }) => {
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async () => {
-    const numericStoreId = Number(storeId);
-    const numericPrice = parseFloat(form.price);
     const token = localStorage.getItem("token");
 
-    if (isNaN(numericStoreId)) {
-      alert("ERRO: storeId deve ser numérico!");
+    const numericStoreId = Number(storeId);
+    const numericPrice = Number(form.price);
+
+    if (!numericStoreId || isNaN(numericStoreId)) {
+      alert("ERRO: O storeId precisa ser numérico!");
       return;
     }
 
-    if (isNaN(numericPrice)) {
-      alert("ERRO: Preço inválido!");
+    if (!numericPrice || isNaN(numericPrice)) {
+      alert("ERRO: Insira um preço válido!");
       return;
     }
 
@@ -50,7 +52,14 @@ const CreateProductModal = ({ open, onClose, storeId, onProductCreated }) => {
 
       if (onProductCreated) onProductCreated(saved);
 
-      setForm({ name: "", description: "", price: "", imageUrl: "" });
+      // reset completo
+      setForm({
+        name: "",
+        description: "",
+        price: "",
+        imageUrl: "",
+      });
+
       onClose();
     } catch (err) {
       console.error("Erro ao criar produto:", err);
@@ -64,16 +73,48 @@ const CreateProductModal = ({ open, onClose, storeId, onProductCreated }) => {
 
       <DialogContent>
         <Stack spacing={2} sx={{ mt: 1 }}>
-          <TextField label="Nome" name="name" value={form.name} onChange={handleChange} fullWidth />
-          <TextField label="Descrição" name="description" value={form.description} onChange={handleChange} multiline rows={3} />
-          <TextField label="Preço" name="price" type="number" value={form.price} onChange={handleChange} fullWidth />
-          <TextField label="URL da Imagem" name="imageUrl" value={form.imageUrl} onChange={handleChange} fullWidth />
+          <TextField
+            label="Nome"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <TextField
+            label="Descrição"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            multiline
+            rows={3}
+          />
+
+          <TextField
+            label="Preço"
+            name="price"
+            type="number"
+            value={form.price}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <TextField
+            label="URL da Imagem"
+            name="imageUrl"
+            value={form.imageUrl}
+            onChange={handleChange}
+            fullWidth
+          />
         </Stack>
       </DialogContent>
 
       <DialogActions>
         <Button onClick={onClose}>Cancelar</Button>
-        <Button variant="contained" onClick={handleSave}>Salvar</Button>
+
+        <Button variant="contained" onClick={handleSave}>
+          Salvar
+        </Button>
       </DialogActions>
     </Dialog>
   );

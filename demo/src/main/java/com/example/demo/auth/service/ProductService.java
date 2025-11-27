@@ -27,10 +27,12 @@ public class ProductService {
     private final UserRepository userRepository;
 
     public List<ProductResponseDto> getByStore(Long storeId) {
-        return productRepository.findByStoreId(storeId)
-                .stream().map(ProductResponseDto::fromEntity)
+        return productRepository.findByStore_Id(storeId) 
+                .stream()
+                .map(ProductResponseDto::fromEntity)
                 .collect(Collectors.toList());
     }
+
 
     @Transactional
     public ProductResponseDto create(Long storeId, ProductRequestDto dto, String email) {

@@ -128,4 +128,14 @@ public class UserService {
         return UserResponseDto.fromEntity(user);
     }
 
+    @Transactional(readOnly = true)
+    public User findEntityByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado com email: " + email));
+    }
+
+    public User findByIdEntity(Long id) {
+    return userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+}
 }

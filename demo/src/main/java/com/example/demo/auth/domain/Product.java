@@ -41,4 +41,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+    @Column(name = "average_rating")
+    @Builder.Default
+    private Double averageRating = 0.0;
 }

@@ -49,16 +49,30 @@ public class SecurityConfig {
 
             .requestMatchers("/api/auth/**", "/api/users/register", "/api/users/login").permitAll()
 
+            // Ratings
+            .requestMatchers(HttpMethod.GET, "/api/products/*/rating").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/products/*/rating").hasAnyRole("USER", "ADMIN")
+
+            // Produtos públicos
             .requestMatchers(HttpMethod.GET, "/api/store/public/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/products/store/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/product/public/**").permitAll()
 
+            // Produtos CRUD
             .requestMatchers(HttpMethod.POST, "/api/products/**").authenticated()
             .requestMatchers(HttpMethod.PUT, "/api/products/**").authenticated()
             .requestMatchers(HttpMethod.DELETE, "/api/products/**").authenticated()
 
+            // Comentários
+            .requestMatchers(HttpMethod.GET, "/api/comments/product/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/comments/product/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated() 
+
+            // Usuários
             .requestMatchers("/api/users/me").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/api/users/**").hasRole("ADMIN")
+
+            // Lojas
             .requestMatchers("/api/store/my").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN")
 

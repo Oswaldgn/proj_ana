@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.auth.domain.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByStoreId(Long storeId);
+
+    List<Product> findByStore_Id(Long storeId);
+
 }

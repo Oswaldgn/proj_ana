@@ -24,6 +24,7 @@ public class ProductResponseDto {
     private String createdAt;
     private Long storeId;
     private String storeName;
+    private Double averageRating;
 
     public static ProductResponseDto fromEntity(Product product) {
         return ProductResponseDto.builder()
@@ -37,6 +38,7 @@ public class ProductResponseDto {
                 .createdAt(product.getCreatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))
                 .storeId(product.getStore().getId())
                 .storeName(product.getStore().getName())
+                .averageRating(product.getAverageRating()) 
                 .build();
     }
 }
