@@ -192,9 +192,27 @@ const ProductCardList = ({ storeId, canEdit }) => {
                       )}
                     </Stack>
                   </Stack>
-                  <Typography variant="body2" sx={{ mt: 1 }}>
-                    R$ {Number(product.price).toFixed(2)}
-                  </Typography>
+                    <Box sx={{ mt: 1 }}>
+                      {product.discount && product.discount > 0 ? (
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ textDecoration: "line-through" }}
+                          >
+                            R$ {Number(product.price).toFixed(2)}
+                          </Typography>
+                          <Typography variant="body1" fontWeight="bold" color="error">
+                            R$ {(product.price * (1 - product.discount / 100)).toFixed(2)}
+                          </Typography>
+                        </Stack>
+                      ) : (
+                        <Typography variant="body1" fontWeight="bold">
+                          R$ {Number(product.price).toFixed(2)}
+                        </Typography>
+                      )}
+                    </Box>
+
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                     {product.description}
                   </Typography>

@@ -80,6 +80,10 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/api/tags/product/**").permitAll() // consultar tags de um produto
             .requestMatchers(HttpMethod.POST, "/api/tags/product/**").hasAnyRole("USER", "ADMIN") // adicionar tags
             .requestMatchers(HttpMethod.DELETE, "/api/tags/**").authenticated() // remover tags
+            .requestMatchers(HttpMethod.GET, "/api/products").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/tags/all").permitAll()
+
 
             .anyRequest().authenticated()
         )

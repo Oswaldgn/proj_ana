@@ -33,8 +33,13 @@ public class ProductTagController {
             @PathVariable Long productId,
             @RequestBody ProductTagRequestDto dto) {
 
+        // 🔥 Impedir salvar tag sem nome
+        if (dto.getTagName() == null || dto.getTagName().isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         ProductTag tag = new ProductTag();
-        tag.setTagName(dto.getTagName());
+        tag.setTagName(dto.getTagName().trim());
 
         Product product = new Product();
         product.setId(productId);
@@ -58,4 +63,15 @@ public class ProductTagController {
         service.deleteTag(tagId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ProductTagResponseDto>> getAllTags() {
+        List<ProductTagResponseDto> dtos = service.getAllTags()
+                .stream()
+                .map(ProductTagResponseDto::fromEntity)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
+    }
 }
+

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.auth.dto.ProductRequestDto;
@@ -25,6 +26,18 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
     private final ProductService productService;
+
+    @PermitAll
+    @GetMapping
+    public List<ProductResponseDto> listAllProducts(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String sortBy,
+            @RequestParam(required = false) List<String> tags) {
+
+        return productService.listProducts(search, sortBy, tags);
+    }
+
+
 
     @PermitAll
     @GetMapping("/store/{storeId}")

@@ -9,7 +9,8 @@ import {
   UserDashboard, 
   HomePage, 
   Footer,
-  StorePage 
+  StorePage,
+  ProductPage
 } from "./views";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/store/:id" element={<StorePage />} />
+            <Route path="/products" element={<ProductPage />} />
             <Route
               path="/admin"
               element={

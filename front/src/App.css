@@ -1,12 +1,26 @@
+/* Definindo variáveis de cores */
+:root {
+  --color-background: #f5f5f5; /* tom de branco sujo / off-white */
+  --color-primary: #1c1c1c; /* preto mais suave */
+  --color-secondary: #4f4f4f; /* cinza médio */
+  --color-accent: #b0b0b0; /* cinza claro para detalhes */
+  --color-text: #1c1c1c;
+  --color-link: #6ca0dc; /* azul suave para links */
+}
+
+/* Estilo global */
 .App {
   text-align: center;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html, body, #root, .app-layout {
-  height: 100%; 
+  height: 100%;
   margin: 0;
   padding: 0;
-  background-color:  #ffffff !important;
+  background-color: var(--color-background) !important;
 }
 
 .app-layout {
@@ -15,14 +29,19 @@ html, body, #root, .app-layout {
 }
 
 .main-content-wrapper {
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .app-footer {
-  height: 15vh; 
-  flex-shrink: 0; 
+  height: 15vh;
+  flex-shrink: 0;
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
@@ -37,18 +56,19 @@ html, body, #root, .app-layout {
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--color-primary);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--color-background);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--color-link);
+  text-decoration: none;
 }
 
 @keyframes App-logo-spin {
@@ -58,4 +78,15 @@ html, body, #root, .app-layout {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Exemplo de elementos secundários */
+button, .card, .MuiPaper-root {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-accent);
+}
+
+button:hover, .MuiPaper-root:hover {
+  border-color: var(--color-secondary);
 }

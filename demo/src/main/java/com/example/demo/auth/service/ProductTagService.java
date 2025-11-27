@@ -30,4 +30,9 @@ public class ProductTagService {
     public void deleteTag(Long tagId) {
         repository.deleteById(tagId);
     }
+
+    public List<ProductTag> getAllTags() {
+        return repository.findAll();
+    }
+
 }

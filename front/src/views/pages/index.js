@@ -4,3 +4,4 @@ export { AdminDashboard } from './admin/AdminDashboard';
 export { UserDashboard } from './user';
 export { HomePage } from './home/HomePage';
 export {StorePage} from "./storepage";
+export { ProductPage } from './product';

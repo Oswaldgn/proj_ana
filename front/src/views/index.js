@@ -15,3 +15,4 @@ export { StoresTable } from './components';
 export {StorePage} from "./pages";
 export {ProductCardList} from './components';
 export { CreateProductModal } from './components';
+export{ ProductPage} from './pages/product';

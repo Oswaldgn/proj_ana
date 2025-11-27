@@ -1,10 +1,57 @@
+:root {
+  --color-background: #f5f5f5; /* off-white */
+  --color-primary: #1c1c1c; /* preto suave */
+  --color-secondary: #4f4f4f; /* cinza médio */
+  --color-accent: #b0b0b0; /* cinza claro */
+  --color-text: #1c1c1c;
+  --color-link: #6ca0dc; /* azul suave */
+}
+
 .appBar {
-  background-color: #f5f5f5 !important; 
-  color: #333333 !important;  
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  box-shadow: none; /* opcional: remove sombra padrão */
 }
 
 .logo {
-  color: inherit;
+  color: var(--color-text);
   text-decoration: none;
   flex-grow: 1;
+  font-weight: bold;
+}
+
+.desktopMenu {
+  display: flex;
+  gap: 8px;
+}
+
+/* Botões */
+.desktopMenu button, .MuiButton-root {
+  color: var(--color-text);
+  background-color: transparent;
+}
+
+.desktopMenu button:hover, .MuiButton-root:hover {
+  background-color: var(--color-accent);
+}
+
+/* Esconde o menu desktop no mobile */
+@media (max-width: 960px) {
+  .desktopMenu {
+    display: none;
+  }
+}
+
+/* Drawer Mobile */
+.MuiDrawer-paper {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.MuiListItemButton-root {
+  color: var(--color-text);
+}
+
+.MuiListItemButton-root:hover {
+  background-color: var(--color-accent);
 }

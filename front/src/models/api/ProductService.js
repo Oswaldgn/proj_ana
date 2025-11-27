@@ -1,6 +1,14 @@
 const URL_BASE = "http://localhost:8080/api/products";
 
 export const ProductService = {
+  async getAllProducts() {
+    const response = await fetch(URL_BASE);
+    if (!response.ok) throw new Error("Erro ao carregar produtos");
+
+    const data = await response.json();
+    return data.map((p) => ({ ...p, rating: p.averageRating || 0 }));
+  },
+
   async getByStoreId(storeId) {
     if (!storeId || isNaN(storeId)) throw new Error("storeId deve ser um número");
 
@@ -8,7 +16,6 @@ export const ProductService = {
     if (!response.ok) throw new Error("Erro ao carregar produtos");
 
     const data = await response.json();
-
     return data.map((p) => ({ ...p, rating: p.averageRating || 0 }));
   },
 
