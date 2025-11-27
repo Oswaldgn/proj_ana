@@ -76,6 +76,11 @@ public class SecurityConfig {
             .requestMatchers("/api/store/my").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/api/store/**").hasAnyRole("USER", "ADMIN")
 
+            // Tags de produtos
+            .requestMatchers(HttpMethod.GET, "/api/tags/product/**").permitAll() // consultar tags de um produto
+            .requestMatchers(HttpMethod.POST, "/api/tags/product/**").hasAnyRole("USER", "ADMIN") // adicionar tags
+            .requestMatchers(HttpMethod.DELETE, "/api/tags/**").authenticated() // remover tags
+
             .anyRequest().authenticated()
         )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

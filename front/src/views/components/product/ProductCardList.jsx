@@ -10,6 +10,7 @@ import {
   IconButton,
   Button,
   Stack,
+  Chip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -21,6 +22,7 @@ import { ProductService } from "../../../models/api/ProductService";
 import { CreateProductModal } from "../../components/productmodal/CreateProductModal";
 import { EditProductModal } from "../../components/productmodal/EditProductModal";
 import { ProductCommentModal } from "../../components/productcommentmodal/ProductCommentModal";
+import { ProductTagModal } from "../../components/producttag/ProductTagModal";
 
 const ProductCardList = ({ storeId, canEdit }) => {
   const [products, setProducts] = useState([]);
@@ -30,6 +32,8 @@ const ProductCardList = ({ storeId, canEdit }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [openTagModal, setOpenTagModal] = useState(false);
+  const [selectedProductForTags, setSelectedProductForTags] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -99,6 +103,11 @@ const ProductCardList = ({ storeId, canEdit }) => {
     setOpenCommentModal(true);
   };
 
+  const handleOpenTags = (product) => {
+    setSelectedProductForTags(product.id);
+    setOpenTagModal(true);
+  };
+
   if (loading) {
     return (
       <Box sx={{ textAlign: "center", mt: 4 }}>
@@ -149,7 +158,6 @@ const ProductCardList = ({ storeId, canEdit }) => {
                       {product.rating ? Number(product.rating).toFixed(1) : "0.0"}
                     </Typography>
                   </Box>
-
                   <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
                     <Typography variant="h6" fontWeight="bold">
                       {product.name}
@@ -173,17 +181,30 @@ const ProductCardList = ({ storeId, canEdit }) => {
                           >
                             <DeleteIcon />
                           </IconButton>
+                          <IconButton
+                            size="small"
+                            color="primary"
+                            onClick={() => handleOpenTags(product)}
+                          >
+                            <AddIcon /> 
+                          </IconButton>
                         </>
                       )}
                     </Stack>
                   </Stack>
-
                   <Typography variant="body2" sx={{ mt: 1 }}>
                     R$ {Number(product.price).toFixed(2)}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                     {product.description}
                   </Typography>
+                  {product.tags && product.tags.length > 0 && (
+                    <Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {product.tags.map((tag) => (
+                        <Chip key={tag.id || tag} label={tag.name || tag} size="small" />
+                      ))}
+                    </Box>
+                  )}
                 </CardContent>
               </Card>
             </Grid>
@@ -208,8 +229,12 @@ const ProductCardList = ({ storeId, canEdit }) => {
         onClose={() => setOpenCommentModal(false)}
         productId={selectedProductId}
       />
+      <ProductTagModal
+        open={openTagModal}
+        onClose={() => setOpenTagModal(false)}
+        productId={selectedProductForTags}
+      />
     </Box>
   );
 };
-
 export { ProductCardList };

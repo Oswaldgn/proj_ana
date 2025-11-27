@@ -1,6 +1,8 @@
 package com.example.demo.auth.dto;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.demo.auth.domain.Product;
 
@@ -25,6 +27,7 @@ public class ProductResponseDto {
     private Long storeId;
     private String storeName;
     private Double averageRating;
+    private List<String> tags;
 
     public static ProductResponseDto fromEntity(Product product) {
         return ProductResponseDto.builder()
@@ -38,7 +41,10 @@ public class ProductResponseDto {
                 .createdAt(product.getCreatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))
                 .storeId(product.getStore().getId())
                 .storeName(product.getStore().getName())
-                .averageRating(product.getAverageRating()) 
+                .averageRating(product.getAverageRating())
+                .tags(product.getTags() != null 
+                        ? product.getTags().stream().map(t -> t.getTagName()).collect(Collectors.toList()) 
+                        : List.of())
                 .build();
     }
 }
